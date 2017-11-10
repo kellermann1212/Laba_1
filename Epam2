@@ -1,0 +1,79 @@
+class BookComparator implements Comparator {
+    @Override
+    public int compare(Object o1, Object o2) {
+        Book b1 = (Book)o1;
+        Book b2 = (Book)o2;
+        char symbol1 = b1.typography.trim().toCharArray()[0];
+        char symbol2 = b2.typography.trim().toCharArray()[0];
+        if (symbol1 < symbol2) {
+            return -1;
+        }
+        if (symbol1 > symbol2) {
+            return 1;
+        }
+        return 0;
+    }
+}
+
+class Book {
+    public String name;
+    public String author;
+    public String typography;
+    public int year;
+    public int pages;
+    public double cost;
+    public Book(String myN, String myA, String myT, int myY, int myP, double myC) {
+        this.name = myN;
+        this.author = myA;
+        this.typography = myT;
+        this.year = myY;
+        this.pages = myP;
+        this.cost = myC;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        String aut = "author2";
+        String typ = "etypography3";
+        int yea = 1904;
+        Book[] myBooks = {
+                new Book("name1", "author1", "otypography1",1901, 101, 10.51),
+                new Book("name2", "author2", "qtypography2",1902, 102, 10.52),
+                new Book("name3", "author3", "etypography3",1903, 103, 10.53),
+                new Book("name4", "author4", "ltypography4",1904, 104, 10.54),
+                new Book("name5", "author5", "htypography5",1905, 105, 10.55),
+                new Book("name6", "author6", "ftypography6",1906, 106, 10.56),
+                new Book("name7", "author7", "atypography7",1907, 107, 10.57)
+        };
+        for(int i = 0; i < myBooks.length; i++) {
+            if(myBooks[i].author.equals(aut)) {
+                System.out.println(myBooks[i].name);
+            }
+            else {
+                System.out.println("Ne nashel.");
+            }
+        }
+        for(int i = 0; i < myBooks.length; i++) {
+            if(myBooks[i].typography == typ) {
+                System.out.println(myBooks[i].name);
+            }
+            else {
+                System.out.println("Ne nashel.");
+            }
+        }
+        for(int i = 0; i < myBooks.length; i++) {
+            if(myBooks[i].year > yea) {
+                System.out.println(myBooks[i].name);
+            }
+            else {
+                System.out.println("Ne nashel.");
+            }
+        }
+        Arrays.sort(myBooks, new BookComparator());
+        for(int i = 0; i < myBooks.length; i++) {
+            System.out.println(myBooks[i].typography);
+        }
+    }
+}
